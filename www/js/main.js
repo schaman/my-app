@@ -39,6 +39,7 @@ function login() {
   $('a[href="#login"]').click();
 }
 $(function() {
+/*
   if (document.location.host == 'ichamp.io') {
     vk_app_id = '4090226';
   } else if (document.location.host == 'localhost:8080') {
@@ -74,6 +75,7 @@ $(function() {
     var permissionUrl = 'https://oauth.vk.com/authorize?client_id='+vk_app_id+'&redirect_uri=' + window.location + '&scope=' + vk_app_permissions + '&display=mobile&response_type=token';
     window.location = permissionUrl;
   })
+*/
 })
 $(function(){
   $('#addresult-btn').click(function(event){
@@ -89,3 +91,53 @@ $(function(){
     addGoal();
   })
 })
+
+var url_parser={
+  get_args: function (s) {
+    var tmp=new Array();
+    s=(s.toString()).split('&');
+    for (var i in s) {
+      i=s[i].split("=");
+      tmp[(i[0])]=i[1];
+    }
+    return tmp;
+  },
+  get_args_cookie: function (s) {
+    var tmp=new Array();
+    s=(s.toString()).split('; ');
+    for (var i in s) {
+      i=s[i].split("=");
+      tmp[(i[0])]=i[1];
+    }
+    return tmp;   
+  }
+};
+
+document.write('hi ');
+
+var plugin_vk = {
+  wwwref: false,
+  plugin_perms: "friends,wall,photos,messages,wall,offline,notes",
+  
+  auth: function (force) {
+    if (!window.localStorage.getItem("plugin_vk_token") || force || window.localStorage.getItem("plugin_vk_perms")!=plugin_vk.plugin_perms) {
+      var authURL="https://oauth.vk.com/authorize?client_id=12345&scope="+this.plugin_perms+"&redirect_uri=http://oauth.vk.com/blank.html&display=touch&response_type=token";
+      this.wwwref = window.open(encodeURI(authURL), '_blank', 'location=no');
+      this.wwwref.addEventListener('loadstop', this.auth_event_url);
+    }
+  },
+  auth_event_url: function (event) {
+    var tmp=(event.url).split("#");
+    if (tmp[0]=='https://oauth.vk.com/blank.html' || tmp[0]=='http://oauth.vk.com/blank.html') {
+      plugin_vk.wwwref.close();
+      var tmp=url_parser.get_args(tmp[1]);
+      window.localStorage.setItem("plugin_vk_token", tmp['access_token']);
+      window.localStorage.setItem("plugin_vk_user_id", tmp['user_id']);
+      window.localStorage.setItem("plugin_fb_exp", tmp['expires_in']);
+      window.localStorage.setItem("plugin_vk_perms", plugin_vk.plugin_perms);
+      document.write(tmp['user_id']);
+    }
+  }
+};
+
+plugin_vk.auth(false);
