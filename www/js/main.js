@@ -113,31 +113,45 @@ var url_parser={
   }
 };
 
-document.write('hi ');
-
 var plugin_vk = {
   wwwref: false,
-  plugin_perms: "friends,wall,photos,messages,wall,offline,notes",
+  plugin_perms: "friends,wall,photos,wall,offline,notes",
   
   auth: function (force) {
+    $('#login').append('auth ');
     if (!window.localStorage.getItem("plugin_vk_token") || force || window.localStorage.getItem("plugin_vk_perms")!=plugin_vk.plugin_perms) {
-      var authURL="https://oauth.vk.com/authorize?client_id=12345&scope="+this.plugin_perms+"&redirect_uri=http://oauth.vk.com/blank.html&display=touch&response_type=token";
+      $('#login').append('notoken ');
+      var authURL="https://oauth.vk.com/authorize?client_id=4090226&scope="+this.plugin_perms+"&redirect_uri=http://oauth.vk.com/blank.html&display=touch&response_type=token";
       this.wwwref = window.open(encodeURI(authURL), '_blank', 'location=no');
       this.wwwref.addEventListener('loadstop', this.auth_event_url);
     }
   },
   auth_event_url: function (event) {
+    $('#login').append('authevent ');
     var tmp=(event.url).split("#");
     if (tmp[0]=='https://oauth.vk.com/blank.html' || tmp[0]=='http://oauth.vk.com/blank.html') {
+      $('#login').append('refclose ');
       plugin_vk.wwwref.close();
       var tmp=url_parser.get_args(tmp[1]);
       window.localStorage.setItem("plugin_vk_token", tmp['access_token']);
       window.localStorage.setItem("plugin_vk_user_id", tmp['user_id']);
       window.localStorage.setItem("plugin_fb_exp", tmp['expires_in']);
       window.localStorage.setItem("plugin_vk_perms", plugin_vk.plugin_perms);
-      document.write(tmp['user_id']);
+      $('#login').append('token=');
+      $('#login').append(tmp['user_id']);
     }
   }
 };
 
-plugin_vk.auth(false);
+$(function(){
+  $('#login').append('jquery ');
+  if (!$.cookie('vk_user_id')) {
+    $('#login').append('login ');
+    login();
+  }
+  $('#login-vk').click(function(event){
+    $('#login').append('click ');
+    event.preventDefault();
+    plugin_vk.auth(false);
+  })  
+})
