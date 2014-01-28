@@ -1,18 +1,286 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <title>iChampion</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    <script type="text/javascript" src="phonegap.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript">
-      app.initialize();
-    </script>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+  <title>iChampion</title>
+  <link rel="shortcut icon" href="icon.png" />
+
+  <link rel="apple-touch-icon" href="my/mobile/freddie-mercury.png"/>
+  <link rel="apple-touch-startup-image" href="my/mobile/freddie-mercury-320x480.png" />
+  <link rel="apple-touch-startup-image" sizes="768x1004" href="my/mobile/freddie-mercury-768x1004.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="stylesheet" type="text/css" href="ext/google/google.css" />
+  <link rel="stylesheet" type="text/css" href="ext/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="ext/bootstrap/bootstrap-theme.min.css" />
+  <link rel="stylesheet" type="text/css" href="ext/bootstrap/datepicker.css" />
+  <link rel="stylesheet" type="text/css" href="ext/bootstrap/bootstrap-select.min.css" />
+  <link rel="stylesheet" type="text/css" href="ext/jquery/jquery-ui-1.9.0.custom.min.css" />
+  <link rel="stylesheet" type="text/css" href="ext/fontello/fontello.css" />
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+  <div class="container">
+    <ul class="nav navbar-nav" id="pages">
+      <li class="active">
+        <a href="#my" data-toggle="tab">
+          <i title="iChampion" class="glyphicon glyphicon-home"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#feed" data-toggle="tab">
+          Новости
+        </a>
+      </li>
+      <li>
+        <a href="#friends" data-toggle="tab">
+          Друзья
+        </a>
+      </li>
+      <li>
+        <a href="#login" data-toggle="tab">
+          Вход
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<div class="container">
+  <div class="tab-content">
+    <div class="tab-pane fade in" id="login">
+      <p style="text-align:center;">
+        <a class="btn btn-primary btn-lg" href="#" id="login-vk" style="font-size:16px; font-weight:bold;">
+          <img src="my/vk/squarelogo64px.png"/> Войти через ВКонтакте
+        </a>
+      </p>
+    </div>
+    <div class="tab-pane fade in active" id="my">
+      <ul class="nav nav-tabs" id="my-pages" style="display:none;">
+        <li class="active"><a href="#my-index" data-toggle="tab">Index</a></li>
+        <li><a href="#my-champ" data-toggle="tab">Champ</a></li>
+        <li><a href="#my-goal" data-toggle="tab">Goal</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane fade in active" id="my-index">
+          <div id="my-data">
+            <p id="nochamps" style="display:none;">
+              Здесь вы можете<br/>ставить цели <nobr>(<span style="color:#5f2c8b;"><i class="glyphicon glyphicon-screenshot"></i> Прицелиться</span>)</nobr>,<br/>планировать задачи <nobr>(<span style="color:#428bca;"><i class="glyphicon glyphicon-flash"></i> Озадачиться</span>)</nobr><br/>и хвастаться результатами <nobr>(<span style="color:#5cb85c;"><i class="glyphicon glyphicon-ok"></i> Похвастаться</span>)</nobr><br/>используя кнопки внизу экрана.
+              <br/>
+              <br/>
+              Ваши результаты появятся в ленте новостей тех, кого вы <a href="#friends">добавили в друзья</a>.
+            </p>
+          </div>
+          <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+            <div class="container">
+              <ul class="nav navbar-nav">
+                <li>
+                  <a id="addresult-btn" style="background-image: -webkit-gradient(linear,left 0,left 100%,from(#5cb85c),to(#449d44)); color:white;" href="#">
+                    <i class="glyphicon glyphicon-ok"></i><br/>Похвастаться
+                  </a>
+                </li>
+                <li>
+                  <a id="addtask-btn" style="background-image: -webkit-gradient(linear,left 0,left 100%,from(#428bca),to(#3071a9)); color:white;" href="#">
+                    <i class="glyphicon glyphicon-flash"></i><br/>Озадачиться
+                  </a>
+                </li>
+                <li>
+                  <a id="addgoal-btn" style="background-image: -webkit-gradient(linear,left 0,left 100%,from(#5f2c8b),to(#5b2a86)); color:white;" href="#">
+                    <i class="glyphicon glyphicon-screenshot"></i><br/>Прицелиться
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+        <div class="tab-pane fade" id="my-champ">
+          <div class="container">
+            <h4 id="champ-header">Похвастаться</h4>
+            <form id="champ-form">
+              <div class="form-group" id="champ-start">
+                <div class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-default">
+                    <input type="radio" name="start" value="missed" id="champ-start-input-missed"> <span>Просрочена</span>
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="start" value="today" id="champ-start-input-today"> Сегодня
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="start" value="tomorrow" id="champ-start-input-tomorrow"> Завтра
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="start" value="later" id="champ-start-input-later"> Потом
+                  </label>
+                </div>
+              </div>
+              <div class="form-group" id="champ-done">
+                <div class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-default">
+                    <input type="radio" name="done" value="earlier" id="champ-done-input-earlier"> <span>Раньше</span>
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="done" value="yesterday" id="champ-done-input-yesterday"> Вчера
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="done" value="today" id="champ-done-input-today"> Сегодня
+                  </label>
+                </div>
+              </div>
+              <div class="form-group" id="champ-teamgoal">
+                Цель
+                <select class="form-control" name="teamgoal" id="champ-input-teamgoal">
+                  <option value="">Без цели</option>
+<!--
+                  {% for team in me.teams %}
+                    <option value="team.{{ team.id }}">@ {{ team.name }}</option>
+                    {% for goal in team.goals %}
+                      <option value="team.{{ team.id }}.goal.{{ goal.created|date('Y-m-d H:i:s') }}"># {{ goal.name }}</option>
+                    {% endfor %}
+                  {% endfor %}
+-->
+                </select>
+              </div>
+              <div class="form-group" id="champ-privacy">
+                Видна
+                <div class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-default">
+                    <input type="radio" name="privacy" value="public" id="champ-input-privacy-public">
+                    Всем
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="privacy" value="friends" id="champ-input-privacy-friends">
+                    Друзьям
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="privacy" value="private" id="champ-input-privacy-private">
+                    Никому
+                  </label>
+                 </div>
+              </div>
+              <div class="form-group">
+                <textarea cols="40" class="form-control" rows="8" name="text" id="champ-input-text" placeholder="Вот как я сегодня отжёг..."></textarea>
+              </div>
+              <input type="submit" id="champ-input-submit" class="btn btn-lg btn-block" value="Я молодец!"/>
+            </form>
+            <br/>
+            <a id="champdone-btn" href="#" class="btn btn-block">Я сделал это!</a>
+            <a id="delchamp-btn" href="#" class="btn btn-danger btn-block">Удалить</a>
+            <a href="#" id="cancelchamp-btn" class="btn btn-default btn-block">Отменить</a>
+          </div>
+        </div>
+        <div class="tab-pane fade" id="my-goal">
+          <div class="container">
+            <h4 id="goal-header"><i class="glyphicon glyphicon-screenshot" style="color:#6a2f9f;"></i> Прицелиться</h4>
+            <form id="goal-form">
+              <div class="form-group">
+                <input type="text" class="form-control" name="name" id="goal-input-name" placeholder="Короткое название"/>
+              </div>
+              <div class="form-group">
+                <textarea cols="40" class="form-control" rows="8" name="text" id="goal-input-text" placeholder="Вот что я сделаю..."></textarea>
+              </div>
+              <div class="form-group" id="goal-team">
+                Команда
+                <select class="form-control" name="team" id="goal-input-team">
+                  <option value="">Личная</option>
+<!--
+                  {% for team in me.teams %}
+                    <option value="{{ team.id }}">{{ team.name }}</option>
+                  {% endfor %}
+-->
+                </select>
+              </div>
+              <div class="form-group" id="goal-privacy">
+                Видна
+                <div class="btn-group" data-toggle="buttons">
+                Видна
+                <div class="btn-group" data-toggle="buttons">
+                  <label class="btn btn-default">
+                    <input type="radio" name="privacy" value="public" id="goal-input-privacy-public">
+                    Всем
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="privacy" value="friends" id="goal-input-privacy-friends">
+                    Друзьям
+                  </label>
+                  <label class="btn btn-default">
+                    <input type="radio" name="privacy" value="private" id="goal-input-privacy-private">
+                    Никому
+                  </label>
+                 </div>
+                </div>
+              </div>
+              <input type="hidden" id="goal-input-id"/>
+              <input type="submit" id="goal-input-submit" class="btn btn-lg btn-block btn-violet" value="Я сделаю это!"/>
+            </form>
+            <br/>
+            <a id="goaldone-btn" href="#" class="btn btn-block">Я сделал это!</a>
+            <a id="delgoal-btn" href="#" class="btn btn-danger btn-block">Удалить</a>
+            <a href="#" id="cancelgoal-btn" class="btn btn-default btn-block">Отменить</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="feed">
+      <div id="feed-data">
+        <p id="nofriends" style="display:none;">
+          Ваша лента новостей пока что пуста.
+          <br/>
+          <br/>
+          Может быть, стоит <a href="#friends">добавить в друзья</a> кого-то поактивнее?
+          <br/>
+          <br/>
+          Его результаты появятся в ваших новостях, когда он подтвердит запрос на дружбу.
+        </p>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="friends">
+      <ul class="nav nav-tabs" id="friends-pages" style="display:none;">
+        <li class="active"><a href="#friends-index" data-toggle="tab">Index</a></li>
+        <li><a href="#friends-invite" data-toggle="tab">Invite</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div class="tab-pane fade in active" id="friends-index">
+          <p>
+            Ты можешь добавлять в друзья других пользователей или удалять их в любой момент. <nobr>Зелёные стрелки (<img src="my/friends/arrow-friend.gif"/>)</nobr> показывают, что пользователь в списке твоих друзей, <nobr>а синие (<img src="my/friends/arrow-friendof.gif"/>)</nobr> означают, что ты в их списках друзей.
+          </p>
+          <p>Ты увидишь в своих новостях задачи типа «Видна всем» тех, кого добавил в друзья. Если он тебя тоже добавит, то вы сможете видеть задачи типа «Видна друзьям» друг друга.</p>
+          <div id="friends-data">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="phonegap.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="ext/jquery/jquery-1.11.0.js"></script>
+<script type="text/javascript" src="ext/jquery.validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="ext/jquery.validate/jquery.validate.messages_ru.js"></script>
+<script type="text/javascript" src="ext/jquery.countdown/jquery.countdown.js"></script>
+<script type="text/javascript" src="ext/jquery.countdown/jquery.countdown-ru.js"></script>
+<script type="text/javascript" src="ext/jquery/jquery-ui-1.9.0.custom.min.js"></script>
+<script type="text/javascript" src="ext/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="ext/bootstrap/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="ext/bootstrap/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="ext/moment/moment.js"></script>
+<script type="text/javascript" src="ext/jquery.cookie/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/champ.js"></script>
+<script type="text/javascript" src="js/feed.js"></script>
+<script type="text/javascript" src="js/friends.js"></script>
+<script type="text/javascript" src="js/goal.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/my.js"></script>
+
+<script type="text/javascript">
+  app.initialize();
+</script>
+</body>
 </html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+  <title>iChampion</title>
+  <link rel="shortcut icon" href="icon.png" />
+
+  <link rel="apple-touch-icon" href="my/mobile/freddie-mercury.png"/>
+  <link rel="apple-touch-startup-image" href="my/mobile/freddie-mercury-320x480.png" />
+  <link rel="apple-touch-startup-image" sizes="768x1004" href="my/mobile/freddie-mercury-768x1004.png" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="stylesheet" type="text/css" href="ext/google/google.css" />
+  <link rel="stylesheet" type="text/css" href="ext/bootstrap/bootstrap.min.css" />
+  <link rel="stylesheet" type="text/css" href="ext/bootstrap/bootstrap-theme.min.css" />
+  <link rel="stylesheet" type="text/css" href="ext/bootstrap/datepicker.css" />
+  <link rel="stylesheet" type="text/css" href="ext/bootstrap/bootstrap-select.min.css" />
+  <link rel="stylesheet" type="text/css" href="ext/jquery/jquery-ui-1.9.0.custom.min.css" />
+  <link rel="stylesheet" type="text/css" href="ext/fontello/fontello.css" />
+  <link rel="stylesheet" type="text/css" href="css/index.css" />
+</head>
+<body>
+
+http://api.ichamp.io/app_dev.php
+<form method="POST" action="http://api.ichamp.io/app_dev.php/my/getdata">
+<input type="text" name="vk_user_id"/>
+<input type="text" name="vk_access_token"/>
+<input type="submit"/>
+</form>
+http://api.ichamp.io
+<form method="POST" action="http://api.ichamp.io/my/getdata">
+<input type="text" name="vk_user_id"/>
+<input type="text" name="vk_access_token"/>
+<input type="submit"/>
+</form>
+http://localhost:8999/app_dev.php/my/getdata
+<form method="POST" action="http://localhost:8999/app_dev.php/my/getdata">
+<input type="text" name="vk_user_id"/>
+<input type="text" name="vk_access_token"/>
+<input type="submit"/>
+</form>
+http://localhost:8999/my/getdata
+<form method="POST" action="http://localhost:8999/my/getdata">
+<input type="text" name="vk_user_id"/>
+<input type="text" name="vk_access_token"/>
+<input type="submit"/>
+</form>
+
+<script type="text/javascript" src="phonegap.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="ext/jquery/jquery-1.10.2.min.js"></script>
+<script type="text/javascript" src="ext/jquery.validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="ext/jquery.validate/jquery.validate.messages_ru.js"></script>
+<script type="text/javascript" src="ext/jquery.countdown/jquery.countdown.js"></script>
+<script type="text/javascript" src="ext/jquery.countdown/jquery.countdown-ru.js"></script>
+<script type="text/javascript" src="ext/jquery/jquery-ui-1.9.0.custom.min.js"></script>
+<script type="text/javascript" src="ext/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="ext/bootstrap/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="ext/bootstrap/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="ext/moment/moment.js"></script>
+<script type="text/javascript" src="ext/jquery.cookie/jquery.cookie.js"></script>
+<script type="text/javascript">
+  app.initialize();
+$(function() {
+  $('input[name="vk_user_id"]').val($.cookie('vk_user_id'));
+  $('input[name="vk_access_token"]').val($.cookie('vk_access_token'));
+})
+</script>
+</body>
+</html>
