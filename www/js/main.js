@@ -41,8 +41,10 @@ function login() {
 $(function() {
   if (document.location.host == 'ichamp.io') {
     vk_app_id = '4090226';
-  } else {
+  } else if (document.location.host == 'localhost:8080') {
     vk_app_id = '2383340';
+  } else {
+    // standalone
   }
 
   hashparams = document.location.href.split('#')[1];
